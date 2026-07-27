@@ -1,0 +1,26 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# SQLite databases (we don't push the raw DB, just the scripts to generate it)
+*.db
+*.sqlite3
+
+# Ignore raw initial datasets (we keep the final ones for the app)
+demographics.csv
+health_survey.csv
+abi_responses.csv
+
+# Ignore local Excel artifacts if they are too large or sensitive
+# final_health_dashboard_data.xlsx
+# ABI_Results_Presentation.pptx
