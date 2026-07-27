@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-import joblib
+from sklearn.ensemble import RandomForestClassifier
 
 st.set_page_config(page_title="Advanced HR Intelligence", layout="wide")
 
@@ -11,11 +11,16 @@ def load_data():
     return pd.read_csv('data/processed/final_ml_dataset.csv')
 
 @st.cache_resource
-def load_model():
-    return joblib.load('models/rf_model.pkl')
+def load_model(_df):
+    features = ['Age', 'Tenure', 'StressLevel', 'SelfRatedHealth', 'Sentiment_Score']
+    X = _df[features].fillna(_df[features].median())
+    y = _df['At_Risk']
+    rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
+    rf_model.fit(X, y)
+    return rf_model
 
 df = load_data()
-model = load_model()
+model = load_model(df)
 
 st.title("🚀 Advanced Workforce Intelligence Platform")
 st.markdown("An end-to-end Machine Learning, NLP, and Data Analytics Dashboard built with Python, Pandas, SQL, and Streamlit.")
