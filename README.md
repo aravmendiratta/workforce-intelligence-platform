@@ -10,7 +10,7 @@
 
 An end-to-end Data Science and Engineering pipeline designed to process, analyze, and predict employee health metrics and the Work Ability Index (ABI).
 
-**Live Dashboard:** [Link to your Streamlit App Here]
+**Live Dashboard:** [https://workforce-intelligence-platform-acguloevvpdztkcrnhrfnz.streamlit.app/](https://workforce-intelligence-platform-acguloevvpdztkcrnhrfnz.streamlit.app/)
 
 ## 📌 Project Overview
 This project simulates a real-world HR analytics environment. It features:
