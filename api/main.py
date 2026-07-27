@@ -14,17 +14,13 @@ class EmployeeData(BaseModel):
     SelfRatedHealth: int
     Sentiment_Score: float
 
-# Load the model on startup
-model = None
-
-@app.on_event("startup")
-def load_model():
-    global model
-    model_path = os.path.join(os.path.dirname(__file__), '..', 'models', 'rf_model.pkl')
-    try:
-        model = joblib.load(model_path)
-    except Exception as e:
-        print(f"Warning: Model not found at {model_path}. You may need to train it first.")
+# Load the model globally
+model_path = os.path.join(os.path.dirname(__file__), '..', 'models', 'rf_model.pkl')
+try:
+    model = joblib.load(model_path)
+except Exception as e:
+    model = None
+    print(f"Warning: Model not found at {model_path}. You may need to train it first.")
 
 @app.get("/")
 def read_root():
