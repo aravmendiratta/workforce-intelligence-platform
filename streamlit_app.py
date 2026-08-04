@@ -10,36 +10,25 @@ st.set_page_config(
     page_title="Workforce Intelligence Platform — Arav Mendiratta",
     page_icon="🚀",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="collapsed",
 )
+
+# ──────────────────────────────────────────────
+# SESSION STATE (navigation)
+# ──────────────────────────────────────────────
+if "page" not in st.session_state:
+    st.session_state.page = "home"
+
+def go_to(page_name):
+    st.session_state.page = page_name
 
 # ──────────────────────────────────────────────
 # GLOBAL STYLING
 # ──────────────────────────────────────────────
 st.markdown("""
 <style>
-    /* ---------- sidebar ---------- */
-    [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #0f0c29, #302b63, #24243e);
-    }
-    [data-testid="stSidebar"] * {
-        color: #e0e0e0 !important;
-    }
-
-    /* ---------- navigation radio buttons ---------- */
-    div[data-testid="stSidebar"] div[role="radiogroup"] label {
-        background: rgba(255,255,255,0.06);
-        border: 1px solid rgba(255,255,255,0.12);
-        border-radius: 10px;
-        padding: 12px 18px;
-        margin-bottom: 6px;
-        transition: all 0.2s ease;
-        cursor: pointer;
-    }
-    div[data-testid="stSidebar"] div[role="radiogroup"] label:hover {
-        background: rgba(255,255,255,0.14);
-        border-color: #7c3aed;
-    }
+    /* ---------- hide default sidebar ---------- */
+    [data-testid="stSidebar"] { display: none; }
 
     /* ---------- hero card ---------- */
     .hero-card {
@@ -64,6 +53,32 @@ st.markdown("""
         color: white;
     }
 
+    /* ---------- navigation cards ---------- */
+    .nav-cards { display: flex; gap: 1.2rem; margin: 1rem 0 2rem 0; }
+    .nav-card {
+        flex: 1;
+        background: linear-gradient(145deg, #f8f7ff 0%, #ede9fe 100%);
+        border: 2px solid #e8e4f9;
+        border-radius: 16px;
+        padding: 1.6rem 1.4rem;
+        text-align: center;
+        transition: all 0.25s ease;
+    }
+    .nav-card:hover {
+        border-color: #7c3aed;
+        transform: translateY(-4px);
+        box-shadow: 0 8px 25px rgba(124,58,237,0.18);
+    }
+    .nav-card .card-icon { font-size: 2.4rem; margin-bottom: 0.5rem; }
+    .nav-card h3 { margin: 0.3rem 0; color: #4c1d95; font-size: 1.15rem; }
+    .nav-card p  { font-size: 0.88rem; color: #555; line-height: 1.5; margin: 0.5rem 0 0 0; }
+    .nav-card .card-skills {
+        margin-top: 0.7rem;
+        font-size: 0.75rem;
+        color: #7c3aed;
+        font-weight: 600;
+    }
+
     /* ---------- section explanation box ---------- */
     .section-explain {
         background: rgba(124, 58, 237, 0.08);
@@ -86,6 +101,14 @@ st.markdown("""
     .arch-step .step-icon { font-size: 2rem; margin-bottom: 0.4rem; }
     .arch-step h4 { margin: 0.3rem 0; color: #4c1d95; }
     .arch-step p  { font-size: 0.88rem; color: #555; }
+
+    /* ---------- call-to-action arrow ---------- */
+    .cta-header {
+        text-align: center;
+        margin: 2rem 0 0.5rem 0;
+    }
+    .cta-header h2 { color: #4c1d95; margin-bottom: 0.2rem; }
+    .cta-header p  { color: #666; font-size: 1.05rem; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -108,36 +131,11 @@ def load_model(_df):
 df = load_data()
 model = load_model(df)
 
-# ──────────────────────────────────────────────
-# SIDEBAR NAVIGATION
-# ──────────────────────────────────────────────
-with st.sidebar:
-    st.markdown("### 🧭 Navigate")
-    page = st.radio(
-        label="Choose a section:",
-        options=[
-            "🏠  Project Overview",
-            "📊  Executive Dashboard",
-            "🧠  NLP Sentiment Analysis",
-            "🤖  Predictive ML Sandbox",
-        ],
-        index=0,
-        label_visibility="collapsed",
-    )
-
-    st.markdown("---")
-    st.markdown(
-        "<p style='font-size:0.78rem;opacity:0.55;text-align:center;'>"
-        "Built by Arav Mendiratta<br>"
-        "Python · SQL · ML · NLP · FastAPI · Docker"
-        "</p>",
-        unsafe_allow_html=True,
-    )
 
 # ══════════════════════════════════════════════
-# PAGE: PROJECT OVERVIEW (Landing)
+# PAGE: HOME (Landing)
 # ══════════════════════════════════════════════
-if page.startswith("🏠"):
+if st.session_state.page == "home":
     # Hero banner
     st.markdown(
         """
@@ -234,22 +232,7 @@ if page.startswith("🏠"):
             unsafe_allow_html=True,
         )
 
-    # ── What you can explore ──
-    st.markdown("---")
-    st.markdown("## 👈 What You Can Explore")
-    st.markdown(
-        """
-        Use the **sidebar** on the left to navigate between the three interactive modules:
-
-        | Section | What It Shows | Skills Demonstrated |
-        |---|---|---|
-        | **📊 Executive Dashboard** | KPI metrics and interactive scatter plots of ABI scores by age, department, and demographics. | Pandas, Plotly, Streamlit, data storytelling |
-        | **🧠 NLP Sentiment Analysis** | Distribution of NLP sentiment scores extracted from employee survey text, cross-referenced against stress levels. | TextBlob, NLP pipelines, box plots, correlation analysis |
-        | **🤖 Predictive ML Sandbox** | A live inference form — adjust employee parameters and the Random Forest model predicts risk in real time. | Scikit-Learn, model serving, feature engineering, interactive ML |
-        """
-    )
-
-    # ── Quick stats ──
+    # ── Dataset at a Glance ──
     st.markdown("---")
     st.markdown("## 📈 Dataset at a Glance")
     c1, c2, c3, c4 = st.columns(4)
@@ -258,11 +241,68 @@ if page.startswith("🏠"):
     c3.metric("Avg ABI Score", round(df['Calculated_ABI_Score'].mean(), 1))
     c4.metric("Employees At Risk", f"{int(df['At_Risk'].sum()):,}")
 
+    # ── NAVIGATION CARDS — the main call-to-action ──
+    st.markdown("---")
+    st.markdown(
+        '<div class="cta-header">'
+        '<h2>👇 Explore the Interactive Modules</h2>'
+        '<p>Click any card below to dive into the live analysis.</p>'
+        '</div>',
+        unsafe_allow_html=True,
+    )
+
+    nav1, nav2, nav3 = st.columns(3)
+    with nav1:
+        st.markdown(
+            '<div class="nav-card">'
+            '<div class="card-icon">📊</div>'
+            '<h3>Executive Dashboard</h3>'
+            '<p>KPI metrics and interactive scatter plots of ABI scores across age, department, and location.</p>'
+            '<div class="card-skills">Pandas · Plotly · Streamlit · Data Storytelling</div>'
+            '</div>',
+            unsafe_allow_html=True,
+        )
+        if st.button("Open Executive Dashboard →", key="btn_dashboard", use_container_width=True):
+            go_to("dashboard")
+            st.rerun()
+
+    with nav2:
+        st.markdown(
+            '<div class="nav-card">'
+            '<div class="card-icon">🧠</div>'
+            '<h3>NLP Sentiment Analysis</h3>'
+            '<p>Distribution of sentiment scores extracted from employee survey text, cross-referenced with stress levels.</p>'
+            '<div class="card-skills">TextBlob · NLP Pipelines · Correlation Analysis</div>'
+            '</div>',
+            unsafe_allow_html=True,
+        )
+        if st.button("Open NLP Analysis →", key="btn_nlp", use_container_width=True):
+            go_to("nlp")
+            st.rerun()
+
+    with nav3:
+        st.markdown(
+            '<div class="nav-card">'
+            '<div class="card-icon">🤖</div>'
+            '<h3>Predictive ML Sandbox</h3>'
+            '<p>Adjust employee parameters and the Random Forest model predicts at-risk status in real time.</p>'
+            '<div class="card-skills">Scikit-Learn · Feature Engineering · Model Serving</div>'
+            '</div>',
+            unsafe_allow_html=True,
+        )
+        if st.button("Open ML Sandbox →", key="btn_ml", use_container_width=True):
+            go_to("ml")
+            st.rerun()
+
 
 # ══════════════════════════════════════════════
 # PAGE: EXECUTIVE DASHBOARD
 # ══════════════════════════════════════════════
-elif page.startswith("📊"):
+elif st.session_state.page == "dashboard":
+    if st.button("← Back to Project Overview"):
+        go_to("home")
+        st.rerun()
+
     st.markdown("# 📊 Executive Dashboard")
 
     st.markdown(
@@ -304,7 +344,11 @@ elif page.startswith("📊"):
 # ══════════════════════════════════════════════
 # PAGE: NLP SENTIMENT ANALYSIS
 # ══════════════════════════════════════════════
-elif page.startswith("🧠"):
+elif st.session_state.page == "nlp":
+    if st.button("← Back to Project Overview"):
+        go_to("home")
+        st.rerun()
+
     st.markdown("# 🧠 NLP Sentiment Analysis")
 
     st.markdown(
@@ -345,7 +389,11 @@ elif page.startswith("🧠"):
 # ══════════════════════════════════════════════
 # PAGE: PREDICTIVE ML SANDBOX
 # ══════════════════════════════════════════════
-elif page.startswith("🤖"):
+elif st.session_state.page == "ml":
+    if st.button("← Back to Project Overview"):
+        go_to("home")
+        st.rerun()
+
     st.markdown("# 🤖 Predictive ML Sandbox")
 
     st.markdown(
