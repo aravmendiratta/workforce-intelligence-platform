@@ -34,48 +34,86 @@ st.markdown("""
     .hero-card {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         border-radius: 16px;
-        padding: 2.5rem 2rem;
+        padding: 2.2rem 2rem 1.8rem 2rem;
         color: white;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.2rem;
     }
-    .hero-card h1 { font-size: 2.4rem; margin-bottom: 0.3rem; color: white; }
-    .hero-card p  { font-size: 1.05rem; opacity: 0.92; }
+    .hero-card h1 { font-size: 2.2rem; margin-bottom: 0.3rem; color: white; }
+    .hero-card p  { font-size: 1rem; opacity: 0.92; margin-bottom: 0.2rem; }
 
     /* ---------- tech pill badges ---------- */
-    .tech-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+    .tech-pills { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 10px; }
     .tech-pill {
         background: rgba(255,255,255,0.18);
         border: 1px solid rgba(255,255,255,0.25);
         border-radius: 20px;
-        padding: 5px 14px;
-        font-size: 0.82rem;
+        padding: 4px 12px;
+        font-size: 0.78rem;
         font-weight: 500;
         color: white;
     }
 
     /* ---------- navigation cards ---------- */
-    .nav-cards { display: flex; gap: 1.2rem; margin: 1rem 0 2rem 0; }
-    .nav-card {
-        flex: 1;
-        background: linear-gradient(145deg, #f8f7ff 0%, #ede9fe 100%);
-        border: 2px solid #e8e4f9;
+    .nav-card-dashboard {
+        background: linear-gradient(145deg, #0f172a 0%, #1e3a5f 100%);
+        border: 1px solid rgba(59,130,246,0.3);
+    }
+    .nav-card-dashboard:hover {
+        border-color: #3b82f6;
+        box-shadow: 0 8px 30px rgba(59,130,246,0.3);
+    }
+    .nav-card-dashboard h3 { color: #93c5fd !important; }
+    .nav-card-dashboard .card-skills { color: #60a5fa !important; }
+
+    .nav-card-nlp {
+        background: linear-gradient(145deg, #1a0a2e 0%, #2d1654 100%);
+        border: 1px solid rgba(168,85,247,0.3);
+    }
+    .nav-card-nlp:hover {
+        border-color: #a855f7;
+        box-shadow: 0 8px 30px rgba(168,85,247,0.3);
+    }
+    .nav-card-nlp h3 { color: #d8b4fe !important; }
+    .nav-card-nlp .card-skills { color: #c084fc !important; }
+
+    .nav-card-ml {
+        background: linear-gradient(145deg, #0a2818 0%, #134e2a 100%);
+        border: 1px solid rgba(34,197,94,0.3);
+    }
+    .nav-card-ml:hover {
+        border-color: #22c55e;
+        box-shadow: 0 8px 30px rgba(34,197,94,0.3);
+    }
+    .nav-card-ml h3 { color: #86efac !important; }
+    .nav-card-ml .card-skills { color: #4ade80 !important; }
+
+    .nav-card-dashboard, .nav-card-nlp, .nav-card-ml {
         border-radius: 16px;
-        padding: 1.6rem 1.4rem;
+        padding: 1.5rem 1.3rem;
         text-align: center;
-        transition: all 0.25s ease;
+        transition: all 0.3s ease;
+        cursor: pointer;
     }
-    .nav-card:hover {
-        border-color: #7c3aed;
-        transform: translateY(-4px);
-        box-shadow: 0 8px 25px rgba(124,58,237,0.18);
+    .nav-card-dashboard:hover, .nav-card-nlp:hover, .nav-card-ml:hover {
+        transform: translateY(-5px);
     }
-    .nav-card .card-icon { font-size: 2.4rem; margin-bottom: 0.5rem; }
-    .nav-card h3 { margin: 0.3rem 0; color: #4c1d95; font-size: 1.15rem; }
-    .nav-card p  { font-size: 0.88rem; color: #555; line-height: 1.5; margin: 0.5rem 0 0 0; }
-    .nav-card .card-skills {
-        margin-top: 0.7rem;
-        font-size: 0.75rem;
-        color: #7c3aed;
+    .nav-card-dashboard .card-icon,
+    .nav-card-nlp .card-icon,
+    .nav-card-ml .card-icon { font-size: 2.2rem; margin-bottom: 0.4rem; }
+
+    .nav-card-dashboard h3,
+    .nav-card-nlp h3,
+    .nav-card-ml h3 { margin: 0.3rem 0; font-size: 1.1rem; }
+
+    .nav-card-dashboard p,
+    .nav-card-nlp p,
+    .nav-card-ml p { font-size: 0.85rem; color: rgba(255,255,255,0.7); line-height: 1.5; margin: 0.4rem 0 0 0; }
+
+    .nav-card-dashboard .card-skills,
+    .nav-card-nlp .card-skills,
+    .nav-card-ml .card-skills {
+        margin-top: 0.6rem;
+        font-size: 0.73rem;
         font-weight: 600;
     }
 
@@ -102,13 +140,13 @@ st.markdown("""
     .arch-step h4 { margin: 0.3rem 0; color: #4c1d95; }
     .arch-step p  { font-size: 0.88rem; color: #555; }
 
-    /* ---------- call-to-action arrow ---------- */
+    /* ---------- CTA header ---------- */
     .cta-header {
         text-align: center;
-        margin: 2rem 0 0.5rem 0;
+        margin: 0.8rem 0 0.3rem 0;
     }
-    .cta-header h2 { color: #4c1d95; margin-bottom: 0.2rem; }
-    .cta-header p  { color: #666; font-size: 1.05rem; }
+    .cta-header h2 { color: #4c1d95; margin-bottom: 0.1rem; font-size: 1.5rem; }
+    .cta-header p  { color: #666; font-size: 0.95rem; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -142,8 +180,7 @@ if st.session_state.page == "home":
         <div class="hero-card">
             <h1>🚀 Advanced Workforce Intelligence Platform</h1>
             <p>
-                An end-to-end <strong>Data Science & Data Engineering</strong> portfolio project
-                demonstrating production-grade skills across the full analytics lifecycle —
+                An end-to-end <strong>Data Science & Data Engineering</strong> portfolio project —
                 from raw data generation and ETL, through Machine Learning and NLP,
                 to interactive visualisation and containerised deployment.
             </p>
@@ -165,7 +202,60 @@ if st.session_state.page == "home":
         unsafe_allow_html=True,
     )
 
-    # ── Motivation & Aim ──
+    # ── NAVIGATION CARDS — right after hero, no scrolling ──
+    st.markdown(
+        '<div class="cta-header">'
+        '<h2>Explore the Interactive Modules</h2>'
+        '<p>Click any card below to dive into the live analysis.</p>'
+        '</div>',
+        unsafe_allow_html=True,
+    )
+
+    nav1, nav2, nav3 = st.columns(3)
+    with nav1:
+        st.markdown(
+            '<div class="nav-card-dashboard">'
+            '<div class="card-icon">📊</div>'
+            '<h3>Executive Dashboard</h3>'
+            '<p>KPI metrics and interactive scatter plots of ABI scores across age, department, and location.</p>'
+            '<div class="card-skills">Pandas · Plotly · Streamlit · Data Storytelling</div>'
+            '</div>',
+            unsafe_allow_html=True,
+        )
+        if st.button("Open Executive Dashboard →", key="btn_dashboard", use_container_width=True):
+            go_to("dashboard")
+            st.rerun()
+
+    with nav2:
+        st.markdown(
+            '<div class="nav-card-nlp">'
+            '<div class="card-icon">🧠</div>'
+            '<h3>NLP Sentiment Analysis</h3>'
+            '<p>Sentiment scores from employee survey text, cross-referenced with stress levels.</p>'
+            '<div class="card-skills">TextBlob · NLP Pipelines · Correlation Analysis</div>'
+            '</div>',
+            unsafe_allow_html=True,
+        )
+        if st.button("Open NLP Analysis →", key="btn_nlp", use_container_width=True):
+            go_to("nlp")
+            st.rerun()
+
+    with nav3:
+        st.markdown(
+            '<div class="nav-card-ml">'
+            '<div class="card-icon">🤖</div>'
+            '<h3>Predictive ML Sandbox</h3>'
+            '<p>Adjust employee parameters and the Random Forest model predicts risk in real time.</p>'
+            '<div class="card-skills">Scikit-Learn · Feature Engineering · Model Serving</div>'
+            '</div>',
+            unsafe_allow_html=True,
+        )
+        if st.button("Open ML Sandbox →", key="btn_ml", use_container_width=True):
+            go_to("ml")
+            st.rerun()
+
+    # ── Motivation & Aim (below the cards) ──
+    st.markdown("---")
     st.markdown("## 🎯 Motivation & Aim")
     st.markdown(
         """
@@ -240,59 +330,6 @@ if st.session_state.page == "home":
     c2.metric("Departments", df['Department'].nunique())
     c3.metric("Avg ABI Score", round(df['Calculated_ABI_Score'].mean(), 1))
     c4.metric("Employees At Risk", f"{int(df['At_Risk'].sum()):,}")
-
-    # ── NAVIGATION CARDS — the main call-to-action ──
-    st.markdown("---")
-    st.markdown(
-        '<div class="cta-header">'
-        '<h2>👇 Explore the Interactive Modules</h2>'
-        '<p>Click any card below to dive into the live analysis.</p>'
-        '</div>',
-        unsafe_allow_html=True,
-    )
-
-    nav1, nav2, nav3 = st.columns(3)
-    with nav1:
-        st.markdown(
-            '<div class="nav-card">'
-            '<div class="card-icon">📊</div>'
-            '<h3>Executive Dashboard</h3>'
-            '<p>KPI metrics and interactive scatter plots of ABI scores across age, department, and location.</p>'
-            '<div class="card-skills">Pandas · Plotly · Streamlit · Data Storytelling</div>'
-            '</div>',
-            unsafe_allow_html=True,
-        )
-        if st.button("Open Executive Dashboard →", key="btn_dashboard", use_container_width=True):
-            go_to("dashboard")
-            st.rerun()
-
-    with nav2:
-        st.markdown(
-            '<div class="nav-card">'
-            '<div class="card-icon">🧠</div>'
-            '<h3>NLP Sentiment Analysis</h3>'
-            '<p>Distribution of sentiment scores extracted from employee survey text, cross-referenced with stress levels.</p>'
-            '<div class="card-skills">TextBlob · NLP Pipelines · Correlation Analysis</div>'
-            '</div>',
-            unsafe_allow_html=True,
-        )
-        if st.button("Open NLP Analysis →", key="btn_nlp", use_container_width=True):
-            go_to("nlp")
-            st.rerun()
-
-    with nav3:
-        st.markdown(
-            '<div class="nav-card">'
-            '<div class="card-icon">🤖</div>'
-            '<h3>Predictive ML Sandbox</h3>'
-            '<p>Adjust employee parameters and the Random Forest model predicts at-risk status in real time.</p>'
-            '<div class="card-skills">Scikit-Learn · Feature Engineering · Model Serving</div>'
-            '</div>',
-            unsafe_allow_html=True,
-        )
-        if st.button("Open ML Sandbox →", key="btn_ml", use_container_width=True):
-            go_to("ml")
-            st.rerun()
 
 
 # ══════════════════════════════════════════════
